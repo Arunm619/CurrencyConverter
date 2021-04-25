@@ -27,19 +27,23 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideCurrencyAPI(): CurrencyAPI = Retrofit.Builder()
+    fun provideCurrencyAPI(okHttpClient: OkHttpClient): CurrencyAPI = Retrofit.Builder()
         .baseUrl(BASE_URL)
         .addConverterFactory(GsonConverterFactory.create())
-        .client(client)
+        .client(okHttpClient)
         .build()
         .create(CurrencyAPI::class.java)
 
 
-    private val interceptor: HttpLoggingInterceptor = HttpLoggingInterceptor().apply {
+    @Singleton
+    @Provides
+    fun provideInterceptor() = HttpLoggingInterceptor().apply{
         this.level = HttpLoggingInterceptor.Level.BODY
     }
 
-    val client: OkHttpClient = OkHttpClient.Builder().apply {
+    @Singleton
+    @Provides
+    fun provideOkHttpClient(interceptor: HttpLoggingInterceptor) =  OkHttpClient.Builder().apply {
         this.addInterceptor(interceptor)
     }.build()
 
