@@ -1,4 +1,4 @@
-package io.arunbuilds.currencyconverter
+package io.arunbuilds.currencyconverter.main
 
 import android.graphics.Color
 import android.os.Bundle
@@ -10,7 +10,6 @@ import androidx.lifecycle.lifecycleScope
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import io.arunbuilds.currencyconverter.databinding.ActivityMainBinding
-import io.arunbuilds.currencyconverter.main.MainViewModel
 import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
