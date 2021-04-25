@@ -54,7 +54,7 @@
         app:layout_constraintTop_toTopOf="@+id/spFromCurrency">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etForm"
+            android:id="@+id/etFrom"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:inputType="numberDecimal" />
