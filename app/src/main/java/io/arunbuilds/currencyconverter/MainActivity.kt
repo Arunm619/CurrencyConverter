@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import io.arunbuilds.currencyconverter.databinding.ActivityMainBinding
 import io.arunbuilds.currencyconverter.main.MainViewModel
@@ -37,15 +38,15 @@ class MainActivity : AppCompatActivity() {
         }
 
         lifecycleScope.launchWhenCreated {
-            viewModel.conversion.collect{ event ->
-                when(event){
+            viewModel.conversion.collect { event ->
+                when (event) {
                     is MainViewModel.CurrencyEvent.Success -> {
                         binding.progressBar.isVisible = false
                         binding.tvResult.setTextColor(Color.BLACK)
                         binding.tvResult.text = event.resultText
 
                     }
-                    is MainViewModel.CurrencyEvent.Failure ->  {
+                    is MainViewModel.CurrencyEvent.Failure -> {
                         binding.progressBar.isVisible = false
                         binding.tvResult.setTextColor(Color.RED)
                         binding.tvResult.text = event.errorText
@@ -55,6 +56,7 @@ class MainActivity : AppCompatActivity() {
 
                     }
                     is MainViewModel.CurrencyEvent.Empty -> {
+                        Snackbar.make(binding.root, "Welcome", Snackbar.LENGTH_SHORT).show()
                     }
                 }
             }
